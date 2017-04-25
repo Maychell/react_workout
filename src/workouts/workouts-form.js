@@ -16,6 +16,7 @@ export default class WorkoutForm extends React.Component {
 	}
 
 	static defaultProps = {
+		onValidate: () => true,
 		onSubmit: () => {},
 	}
 
@@ -35,17 +36,19 @@ export default class WorkoutForm extends React.Component {
 	handleSubmit(event) {
 		event.preventDefault();
 
-		const { onSubmit: handleSubmit } = this.props;
+		const { onValidate: isValid, onSubmit: handleSubmit } = this.props;
 		const { workout } = this.state;
 
-		handleSubmit(workout);
-		this.setState({
-			workout: {
-				time: '',
-				type: '',
-				date: ''
-			}
-		});
+		if (isValid(workout)) {
+			handleSubmit(workout);
+			this.setState({
+				workout: {
+					time: '',
+					type: '',
+					date: ''
+				}
+			});
+		}
 	}
 
 	render() {

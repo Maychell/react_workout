@@ -12,9 +12,23 @@ export default class WorkoutBox extends React.Component {
     return (
     	<div id='box'>
 	      <WorkoutForm
-          onSubmit={this._addWorkout} />
+          onSubmit={this._addWorkout}
+          onValidate={this._validateWorkout} />
 	     </div>
     );
+  }
+
+  _validateWorkout(workout) {
+    if (workout.time === '') {
+      return false;
+    }
+    if (workout.type === '') {
+      return false;
+    }
+    if (workout.date === '') {
+      return false;
+    }
+    return true;
   }
 
   _addWorkout(workout) {

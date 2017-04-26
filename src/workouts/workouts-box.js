@@ -3,7 +3,7 @@ import WorkoutForm from './workouts-form';
 import WorkoutList from './workouts-list';
 
 export default class WorkoutBox extends React.Component {
-	constructor() {
+  constructor() {
     super();
     this.state = { workouts: [] };
     this._addWorkout = this._addWorkout.bind(this);
@@ -12,14 +12,14 @@ export default class WorkoutBox extends React.Component {
  
   render() {
     return (
-    	<div id='box'>
-	      <WorkoutForm
+      <div id='box'>
+        <WorkoutForm
           onSubmit={this._addWorkout}
           onValidate={this._validateWorkout} />
-	      <WorkoutList
-	      	items={this.state.workouts}
-	      	onDeleteItem={this._deleteWorkout} />
-	     </div>
+        <WorkoutList
+          items={this.state.workouts}
+          onDeleteItem={this._deleteWorkout} />
+       </div>
     );
   }
 
@@ -37,19 +37,19 @@ export default class WorkoutBox extends React.Component {
   }
 
   _addWorkout(workout) {
-  	const workouts = [
-  		...this.state.workouts,
-  		{
-  			...workout,
-  			id: (new Date()).getTime()
-  		},
-  	];
+    const workouts = [
+      ...this.state.workouts,
+      {
+        ...workout,
+        id: (new Date()).getTime()
+      },
+    ];
 
-  	this.setState({ workouts });
+    this.setState({ workouts });
   }
 
   _deleteWorkout(id) {
-  	const workouts = this.state.workouts.filter( workout => workout.id !== id );
+    const workouts = this.state.workouts.filter( workout => workout.id !== id );
     this.setState({ workouts });
   }
 }
